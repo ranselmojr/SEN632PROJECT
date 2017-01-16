@@ -1,4 +1,4 @@
-package com.src.quizapplication;
+package quizapplicationlib;
 
 import java.sql.*;
 /**

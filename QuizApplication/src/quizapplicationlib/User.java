@@ -1,4 +1,4 @@
-package com.src.quizapplication;
+package quizapplicationlib;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,11 +25,10 @@ public class User {
      * @param email
      * @param username
      * @param password
-     * 
+     *
      */
-    public void addUser(String firstname, String lastname, String email,
-            String username, String password) 
-    {
+    public boolean addUser(String firstname, String lastname, String email,
+            String username, String password) {
         String value = null;
         String sql = "insert into user (firstname, lastname, "
                 + "email, username, password)"
@@ -49,11 +48,10 @@ public class User {
             if (username.equals(value)) {
                 System.out.println("Username already exist!!!");
                 con.close();
-                return;
+                return false;
             } else {
                 PreparedStatement preparedStmt = con.prepareStatement(sql);
 
-                
                 preparedStmt.setString(1, firstname);
                 preparedStmt.setString(2, lastname);
                 preparedStmt.setString(3, email);
@@ -68,6 +66,8 @@ public class User {
         } catch (Exception e) {
             System.out.println(e);
         }
+
+        return true;
 
     }
 
@@ -113,6 +113,38 @@ public class User {
             System.out.println(e);
         }
         return false;
+    }
+
+    public String[] getUser(String username) {
+        String value_user = null;
+        String[] userData = new String[5];
+
+        try {
+            con = DatabaseConnection.getConnection();
+            //stmt = con.createStatement();
+            //rs = stmt.executeQuery(sql);
+
+            String sql = "select * from user where username = '"
+                    + username + "'";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                userData[0] = rs.getString(2);
+                userData[1] = rs.getString(3);
+                userData[2] = rs.getString(4);
+                userData[3] = rs.getString(5);
+                userData[4] = rs.getString(6);
+
+            }
+
+            con.close();
+            return userData;
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return userData;
     }
 
 }
