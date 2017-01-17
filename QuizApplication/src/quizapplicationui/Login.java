@@ -20,6 +20,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        jPasswordField1.selectAll();
     }
 
     /**
@@ -62,6 +63,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         jPasswordField1.setText("jPasswordField2");
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -115,11 +121,53 @@ public class Login extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    @SuppressWarnings("unchecked")
+
+    /**
+     *  Wait for the User to Press Login Button
+     * 
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String[] userData = new String[5];
+        this.checkCredentials();
+    }//GEN-LAST:event_jButton1ActionPerformed
+    /**
+     * Wait for User to press Register Button
+     * 
+     * @param evt
+     */
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        new Register().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    /**
+     * Check key event to continue Waiting for user to press <Enter> key to
+     * continue
+     *
+     * @param evt
+     */
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+        this.checkCredentials();
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
+
+    /**
+     * Code Redundancy to eliminate repetitive use
+     *
+     * Check Credentials
+     *
+     * Need username Need password
+     *
+     */
+    private void checkCredentials() {
+        Object[] userData = new Object[6];
         boolean test = false;
         User myUser = new User();
 
@@ -136,8 +184,7 @@ public class Login extends javax.swing.JFrame {
 
         if (test) {
             JFrame f = new MainMenu(userData);
-            
-            
+
             f.setVisible(true);
             //new MainMenu(userData).setVisible(true);
             this.setVisible(false);
@@ -145,20 +192,7 @@ public class Login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Invalid Username/Password!!!",
                     "Warning", JOptionPane.WARNING_MESSAGE);
         }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        new Register().setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }
 
     /**
      * @param args the command line arguments

@@ -114,10 +114,16 @@ public class User {
         }
         return false;
     }
-
-    public String[] getUser(String username) {
+    /**
+     * Get the user info from the Database and return data 
+     *    in an Object
+     * 
+     * @param username
+     * @return 
+     */
+    public Object[] getUser(String username) {
         String value_user = null;
-        String[] userData = new String[5];
+        Object[] userData = new Object[6];
 
         try {
             con = DatabaseConnection.getConnection();
@@ -130,11 +136,12 @@ public class User {
             rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-                userData[0] = rs.getString(2);
-                userData[1] = rs.getString(3);
-                userData[2] = rs.getString(4);
-                userData[3] = rs.getString(5);
-                userData[4] = rs.getString(6);
+                userData[0] = rs.getInt(1);
+                userData[1] = rs.getString(2);
+                userData[2] = rs.getString(3);
+                userData[3] = rs.getString(4);
+                userData[4] = rs.getString(5);
+                userData[5] = rs.getString(6);
 
             }
 

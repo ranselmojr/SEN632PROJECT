@@ -147,13 +147,21 @@ public class Register extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Wait for the User to click <Back> button
+     * 
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         new Login().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    /**
+     * Retrieved data from text fields and Register the User
+     * 
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         boolean test = false;
@@ -169,8 +177,10 @@ public class Register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Username empty",
                     "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            //test = myUser.addUser(firstNameValue, lastNameValue, emailValue, 
-            //        userNameValue, passwordValue);
+            
+            // Writes data to the database
+            test = myUser.addUser(firstNameValue, lastNameValue, emailValue, 
+                    userNameValue, passwordValue);
 
             if (test) {
                 JOptionPane.showMessageDialog(null, "Registered",
