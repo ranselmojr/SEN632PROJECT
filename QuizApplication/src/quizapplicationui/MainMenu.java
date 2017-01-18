@@ -5,6 +5,8 @@
  */
 package quizapplicationui;
 
+import java.awt.Font;
+import javax.swing.JOptionPane;
 import quizapplicationlib.User;
 
 /**
@@ -25,11 +27,10 @@ public class MainMenu extends javax.swing.JFrame {
         
         //userData = myUser.getUser(userName);
         
-        
-        jLabel1.setText("User ID: " + userData[0]);
-        jLabel2.setText("First Name: " + userData[1]);
-        jLabel3.setText("Lastname: " + userData[2]);
-        jLabel4.setText("Email: " + userData[3]);
+        jLabel1.setFont(new Font("Helvetica", Font.PLAIN, 30));
+        jLabel1.setText("Hello,  " + userData[1] +" " + userData[2]);
+        jLabel2.setFont(new Font("Helvetica", Font.PLAIN, 30));
+        jLabel2.setText("Please pick the Quiz Level");
         
         
     }
@@ -45,21 +46,72 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        buttonResults = new javax.swing.JButton();
+        buttonQ1 = new javax.swing.JButton();
+        buttonQ2 = new javax.swing.JButton();
+        buttonQ3 = new javax.swing.JButton();
+        buttonQ4 = new javax.swing.JButton();
+        buttonQ5 = new javax.swing.JButton();
+        buttonQ6 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("jLabel1");
 
         jLabel2.setText("jLabel2");
 
-        jLabel3.setText("jLabel3");
+        buttonResults.setText("Check Results");
+        buttonResults.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonResultsActionPerformed(evt);
+            }
+        });
 
-        jLabel4.setText("jLabel4");
+        buttonQ1.setText("Quiz1");
+        buttonQ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ1ActionPerformed(evt);
+            }
+        });
+
+        buttonQ2.setText("Quiz 2");
+        buttonQ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ2ActionPerformed(evt);
+            }
+        });
+
+        buttonQ3.setText("Quiz 3");
+        buttonQ3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ3ActionPerformed(evt);
+            }
+        });
+
+        buttonQ4.setText("Quiz 4");
+        buttonQ4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ4ActionPerformed(evt);
+            }
+        });
+
+        buttonQ5.setText("Quiz 5");
+        buttonQ5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ5ActionPerformed(evt);
+            }
+        });
+
+        buttonQ6.setText("Quiz 6");
+        buttonQ6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonQ6ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
 
@@ -80,13 +132,26 @@ public class MainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addContainerGap(462, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonQ1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonQ3, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonQ2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonResults, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonQ4, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonQ6, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonQ5, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,11 +160,23 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonQ1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(buttonQ2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(buttonQ3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonQ4, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(buttonQ5, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(73, 73, 73)
+                        .addComponent(buttonQ6, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addComponent(buttonResults, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -110,6 +187,48 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void buttonResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResultsActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz Result",
+                    "Quiz Result", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonResultsActionPerformed
+
+    private void buttonQ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ1ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 1",
+                    "Quiz 1", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ1ActionPerformed
+
+    private void buttonQ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ2ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 2",
+                    "Quiz 2", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ2ActionPerformed
+
+    private void buttonQ3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ3ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 3",
+                    "Quiz 3", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ3ActionPerformed
+
+    private void buttonQ4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ4ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 4",
+                    "Quiz 4", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ4ActionPerformed
+
+    private void buttonQ5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ5ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 5",
+                    "Quiz 5", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ5ActionPerformed
+
+    private void buttonQ6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ6ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Quiz 6",
+                    "Quiz 6", JOptionPane.WARNING_MESSAGE);
+    }//GEN-LAST:event_buttonQ6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,10 +267,15 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonQ1;
+    private javax.swing.JButton buttonQ2;
+    private javax.swing.JButton buttonQ3;
+    private javax.swing.JButton buttonQ4;
+    private javax.swing.JButton buttonQ5;
+    private javax.swing.JButton buttonQ6;
+    private javax.swing.JButton buttonResults;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
