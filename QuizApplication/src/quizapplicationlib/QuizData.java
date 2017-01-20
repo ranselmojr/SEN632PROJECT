@@ -24,19 +24,20 @@ public class QuizData {
      * @param userID
      * @param result
      */
-    public void writeResult(int userID, Double quizResult) {
+    public void writeResult(int userID, Double quizResult, int quizType) {
 
         try {
 
             con = DatabaseConnection.getConnection();
 
-            String sql = "insert into quiz (user_id, quizresults)"
-                    + "values (?,?)";
+            String sql = "insert into quiz (user_id, quizresults, quiztype)"
+                    + "values (?,?,?)";
 
             PreparedStatement preparedStmt = con.prepareStatement(sql);
 
             preparedStmt.setInt(1, userID);
             preparedStmt.setDouble(2, quizResult);
+            preparedStmt.setInt(3, quizType);
 
             preparedStmt.execute();
             con.close();
@@ -56,11 +57,7 @@ public class QuizData {
      */
     public ArrayList<QuizResult> getResult(int userID) {
 
-        int row = 0;
-        int columns = 3;
-        //QuizResult preResult = new QuizResult();
-        //Object[][] quizResult = new Object[100][columns];
-        //Object[][] preResult = new Object[0][0];
+        
         ArrayList<QuizResult> quizResult = new ArrayList<QuizResult>();
         try {
 
@@ -68,7 +65,8 @@ public class QuizData {
             //stmt = con.createStatement();
             //rs = stmt.executeQuery(sql);
 
-            String sql = "select * from quiz where user_id = '"
+            String sql = "select * from quiz inner join quiztype "
+                    + " on quiz.quiztype = quiztype.id where user_id = '"
                     + userID + "'";
 
             stmt = con.createStatement();
@@ -76,7 +74,8 @@ public class QuizData {
             
             while (rs.next()) {
 
-                QuizResult preResult = new QuizResult(rs.getInt(1), rs.getInt(2), rs.getDouble(3));
+                QuizResult preResult = new QuizResult(rs.getInt(1), 
+                        rs.getInt(2), rs.getDouble(3), rs.getString(6));
                 
                 quizResult.add(preResult);
 

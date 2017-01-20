@@ -141,7 +141,7 @@ public class User {
                 userData[2] = rs.getString(3);
                 userData[3] = rs.getString(4);
                 userData[4] = rs.getString(5);
-                userData[5] = rs.getString(6);
+                userData[5] = rs.getString(7);
 
             }
 
@@ -152,6 +152,52 @@ public class User {
             System.out.println(e);
         }
         return userData;
+    }
+    
+    public boolean upgradeUser(int userID){
+        
+        int userLevel = 0;
+        
+        try {
+            con = DatabaseConnection.getConnection();
+            
+            String sql = "select quizlevel from user where id = '"
+                    + userID + "'";
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+            
+            if(rs.first()){
+                userLevel = rs.getInt(1);
+            }
+            
+            if(userLevel != 4){
+                
+    
+                userLevel += 1;
+                String sql2 = "update user set quizlevel="
+                        +userLevel + " where id="+ userID;
+                
+                PreparedStatement preparedStmt = con.prepareStatement(sql2);
+                
+              
+
+                preparedStmt.executeUpdate();
+                con.close();
+                return false;
+                
+        
+            }
+            
+            con.close();
+            
+            
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return true;
     }
 
 }

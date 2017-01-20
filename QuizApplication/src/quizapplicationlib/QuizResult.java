@@ -8,20 +8,24 @@ package quizapplicationlib;
 /**
  *
  * @author romeo
- * 
+ *
  * This is to create a multi data type array
- * 
+ *
  */
 public class QuizResult {
 
     int resultID;
     int user_id;
     double quizResult;
+    String quizType;
 
-    QuizResult(int resultID, int user_id, double quizResult) {
+    QuizResult(int resultID, int user_id, double quizResult,
+            String quizType) 
+    {
         this.resultID = resultID;
         this.user_id = user_id;
         this.quizResult = quizResult;
+        this.quizType = quizType;
     }
 
 }
