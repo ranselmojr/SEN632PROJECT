@@ -18,14 +18,16 @@ public class QuizResult {
     int user_id;
     double quizResult;
     String quizType;
+    String quizTaken;
 
     QuizResult(int resultID, int user_id, double quizResult,
-            String quizType) 
+            String quizType, String quizTaken) 
     {
         this.resultID = resultID;
         this.user_id = user_id;
         this.quizResult = quizResult;
         this.quizType = quizType;
+        this.quizTaken = quizTaken;
     }
 
 }

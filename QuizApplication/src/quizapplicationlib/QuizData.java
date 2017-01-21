@@ -5,8 +5,11 @@
  */
 package quizapplicationlib;
 
+
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.sql.Date;
+
 
 /**
  *
@@ -17,6 +20,65 @@ public class QuizData {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
+    
+    /**
+     * Get all question according to quizType
+     * 
+     * @param quizType
+     * 
+     * @return quizQuestion
+     */
+    public ArrayList<QuizQuestion> getQuizQuestions(int quizType) {
+        
+        ArrayList<QuizQuestion> quizQuestion = new ArrayList<QuizQuestion>();
+
+        try {
+
+            con = DatabaseConnection.getConnection();
+
+            String sql = "select * from quiz_question where quiztype = "
+                    + quizType;
+
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sql);
+            
+            while (rs.next()) {
+
+                QuizQuestion preResult = new QuizQuestion(rs.getString(2), 
+                        rs.getString(3), rs.getString(4), rs.getString(5),
+                        rs.getString(6), rs.getBoolean(7), rs.getBoolean(8),
+                        rs.getInt(9)
+                );
+                
+                quizQuestion.add(preResult);
+
+            }
+            
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return quizQuestion;
+
+    }
+    /**
+     * Shuffle ArrayList to randomized the order of the question
+     * 
+     * @param rawQuiz
+     * 
+     * @return Shuffled ArrayList
+     */
+    public ArrayList shuffleQuestionsChoices
+            (ArrayList rawQuestion) {
+                
+        Collections.shuffle(rawQuestion);
+        
+        return rawQuestion;
+
+    }
+     
 
     /**
      * Writes Quiz Result to the Database
@@ -30,8 +92,9 @@ public class QuizData {
 
             con = DatabaseConnection.getConnection();
 
-            String sql = "insert into quiz (user_id, quizresults, quiztype)"
-                    + "values (?,?,?)";
+            String sql = "insert into quiz (user_id, quizresults, quiztype, "
+                    + "quiz_taken)"
+                    + "values (?,?,?, now())";
 
             PreparedStatement preparedStmt = con.prepareStatement(sql);
 
@@ -40,6 +103,7 @@ public class QuizData {
             preparedStmt.setInt(3, quizType);
 
             preparedStmt.execute();
+
             con.close();
 
         } catch (Exception e) {
@@ -73,9 +137,14 @@ public class QuizData {
             rs = stmt.executeQuery(sql);
             
             while (rs.next()) {
+                
+                Date aDate = rs.getDate(5);
+                String valueToInsert = aDate.toString();
 
                 QuizResult preResult = new QuizResult(rs.getInt(1), 
-                        rs.getInt(2), rs.getDouble(3), rs.getString(6));
+                        rs.getInt(2), rs.getDouble(3), rs.getString(6),
+                        valueToInsert
+                );
                 
                 quizResult.add(preResult);
 
