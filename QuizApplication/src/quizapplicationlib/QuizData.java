@@ -5,32 +5,30 @@
  */
 package quizapplicationlib;
 
-
 import java.sql.*;
 import java.util.*;
-import java.sql.Date;
-
 
 /**
  *
  * @author romeo
  */
 public class QuizData {
-
+    
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
+
     
     /**
      * Get all question according to quizType
-     * 
+     *
      * @param quizType
-     * 
+     *
      * @return quizQuestion
      */
-    public ArrayList<QuizQuestion> getQuizQuestions(int quizType) {
-        
-        ArrayList<QuizQuestion> quizQuestion = new ArrayList<QuizQuestion>();
+    public ArrayList<QuizQuestionBank> getQuizQuestions(int quizType) {
+
+        ArrayList<QuizQuestionBank> quizQuestion = new ArrayList<QuizQuestionBank>();
 
         try {
 
@@ -41,44 +39,43 @@ public class QuizData {
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            
+
             while (rs.next()) {
 
-                QuizQuestion preResult = new QuizQuestion(rs.getString(2), 
+                QuizQuestionBank preResult = new QuizQuestionBank(rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getBoolean(7), rs.getBoolean(8),
                         rs.getInt(9)
                 );
-                
+
                 quizQuestion.add(preResult);
 
             }
-            
+
             con.close();
 
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         return quizQuestion;
 
     }
+
     /**
      * Shuffle ArrayList to randomized the order of the question
-     * 
+     *
      * @param rawQuiz
-     * 
+     *
      * @return Shuffled ArrayList
      */
-    public ArrayList shuffleQuestionsChoices
-            (ArrayList rawQuestion) {
-                
+    public ArrayList shuffleQuestionsChoices(ArrayList rawQuestion) {
+
         Collections.shuffle(rawQuestion);
-        
+
         return rawQuestion;
 
     }
-     
 
     /**
      * Writes Quiz Result to the Database
@@ -110,18 +107,17 @@ public class QuizData {
             System.out.println(e);
         }
 
-    }   
-    
+    }
+
     /**
      * This is to return a multi data type array for the quiz Result
-     * 
+     *
      * @param userID
-     * @return 
-     * 
+     * @return
+     *
      */
     public ArrayList<QuizResult> getResult(int userID) {
 
-        
         ArrayList<QuizResult> quizResult = new ArrayList<QuizResult>();
         try {
 
@@ -135,17 +131,17 @@ public class QuizData {
 
             stmt = con.createStatement();
             rs = stmt.executeQuery(sql);
-            
+
             while (rs.next()) {
-                
-                Date aDate = rs.getDate(5);
+
+                java.sql.Date aDate = rs.getDate(5);
                 String valueToInsert = aDate.toString();
 
-                QuizResult preResult = new QuizResult(rs.getInt(1), 
+                QuizResult preResult = new QuizResult(rs.getInt(1),
                         rs.getInt(2), rs.getDouble(3), rs.getString(6),
                         valueToInsert
                 );
-                
+
                 quizResult.add(preResult);
 
             }
@@ -158,6 +154,5 @@ public class QuizData {
         return quizResult;
 
     }
-
-
+    
 }

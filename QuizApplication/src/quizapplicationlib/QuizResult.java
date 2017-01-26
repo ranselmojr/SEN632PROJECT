@@ -5,29 +5,29 @@
  */
 package quizapplicationlib;
 
+import java.sql.*;
+
 /**
  *
  * @author romeo
- *
- * This is to create a multi data type array
- *
  */
 public class QuizResult {
-
-    int resultID;
-    int user_id;
-    double quizResult;
-    String quizType;
-    String quizTaken;
-
+    public int resultID;
+    public int user_id;
+    public double quizResult;
+    public String quizType;
+    public String quizTaken;
+    private Connection con = null;
+    private Statement stmt = null;
+    private ResultSet rs = null;
+    
     QuizResult(int resultID, int user_id, double quizResult,
-            String quizType, String quizTaken) 
-    {
+            String quizType, String quizTaken) {
         this.resultID = resultID;
         this.user_id = user_id;
         this.quizResult = quizResult;
         this.quizType = quizType;
         this.quizTaken = quizTaken;
     }
-
+    
 }

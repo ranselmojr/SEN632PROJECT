@@ -9,18 +9,18 @@ package quizapplicationlib;
  *
  * @author romeo
  */
-public class QuizQuestion {
-    String question;
-    String corAnswer;
-    String wrongAns1;
-    String wrongAns2;
-    String wrongAns3;
-    boolean is_tf;
-    boolean tf_ans;
-    int quizType;
+public class QuizQuestionBank {
+    public String question;
+    public String corAnswer;
+    public String wrongAns1;
+    public String wrongAns2;
+    public String wrongAns3;
+    public boolean is_tf;
+    public boolean tf_ans;
+    public int quizType;
     
 
-    QuizQuestion(String question, String corAnswer, String wrongAns1, 
+    QuizQuestionBank(String question, String corAnswer, String wrongAns1, 
             String wrongAns2, String wrongAns3, boolean is_tf, 
             boolean tf_ans, int quizType) 
     {

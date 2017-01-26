@@ -6,6 +6,7 @@
 package quizapplicationui;
 
 import java.awt.Font;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import quizapplicationlib.User;
 
@@ -13,26 +14,44 @@ import quizapplicationlib.User;
  *
  * @author romeo
  */
-public class MainMenu extends javax.swing.JFrame {
+public class DisplayMainMenu extends javax.swing.JFrame {
+
     private static String userName = null;
-    private static Object[] userData = new Object[6];
+    private static Object[] userDATA = new Object[6];
+    private static int userID;
+    private static String firstName;
+    private static String lastName;
+    private final String userLevel;
+    
 
     /**
      * Creates new form MainMenu
      */
-    public MainMenu(Object[] userData) {
+    public DisplayMainMenu(Object[] userData) {
         initComponents();
+
+        userID = (int) userData[0];
+        firstName = (String) userData[1];
+        lastName = (String) userData[2];
+        userDATA = userData;
+        userLevel = (String) userData[5];
         
-        //User myUser = new User();
-        
-        //userData = myUser.getUser(userName);
-        
-        jLabel1.setFont(new Font("Helvetica", Font.PLAIN, 30));
-        jLabel1.setText("Hello,  " + userData[1] +" " + userData[2]);
-        jLabel2.setFont(new Font("Helvetica", Font.PLAIN, 30));
+        jLabel1.setFont(new Font("Helvetica", Font.PLAIN, 20));
+        jLabel2.setFont(new Font("Helvetica", Font.PLAIN, 20));
+        jLabel1.setText("Hello,  " + firstName + " " + lastName);
         jLabel2.setText("Please pick the Quiz Level");
-        
-        
+        System.out.println(userDATA[5]);
+        if(userLevel.equals("1")){
+            buttonQ2.setEnabled(false);
+            buttonQ3.setEnabled(false);
+            buttonQ4.setEnabled(false);
+        }else if(userLevel.equals("2")){
+            buttonQ3.setEnabled(false);
+            buttonQ4.setEnabled(false);
+        }else if(userLevel.equals("3")){
+            buttonQ4.setEnabled(false);
+        }
+            
     }
 
     /**
@@ -141,16 +160,16 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(34, 34, 34)
-                .addComponent(buttonQ1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonQ1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonQ2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonQ2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonQ3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonQ3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonQ4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(117, 117, 117)
-                .addComponent(buttonResults, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+                .addComponent(buttonQ4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67)
+                .addComponent(buttonResults, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,32 +183,42 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void buttonResultsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonResultsActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Quiz Result",
-                    "Quiz Result", JOptionPane.WARNING_MESSAGE);
+        JFrame f = new DisplayQuizHistory(userDATA);
+
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonResultsActionPerformed
 
     private void buttonQ1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ1ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Quiz 1",
-                    "Quiz 1", JOptionPane.WARNING_MESSAGE);
+        JFrame f = new DisplayQuizArea(userDATA, 1);
+
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonQ1ActionPerformed
 
     private void buttonQ2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ2ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Quiz 2",
-                    "Quiz 2", JOptionPane.WARNING_MESSAGE);
+        JFrame f = new DisplayQuizArea(userDATA, 2);
+
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonQ2ActionPerformed
 
     private void buttonQ3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ3ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Quiz 3",
-                    "Quiz 3", JOptionPane.WARNING_MESSAGE);
+        JFrame f = new DisplayQuizArea(userDATA, 3);
+
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonQ3ActionPerformed
 
     private void buttonQ4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonQ4ActionPerformed
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Quiz 4",
-                    "Quiz 4", JOptionPane.WARNING_MESSAGE);
+        JFrame f = new DisplayQuizArea(userDATA, 4);
+
+        f.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_buttonQ4ActionPerformed
 
     /**
@@ -209,21 +238,27 @@ public class MainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu(userData).setVisible(true);
+                new DisplayMainMenu(userDATA).setVisible(true);
             }
         });
     }

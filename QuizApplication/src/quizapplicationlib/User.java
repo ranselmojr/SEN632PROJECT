@@ -144,6 +144,8 @@ public class User {
                 userData[5] = rs.getString(7);
 
             }
+            
+            System.out.println();
 
             con.close();
             return userData;
