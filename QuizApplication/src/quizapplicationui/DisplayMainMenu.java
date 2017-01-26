@@ -40,7 +40,6 @@ public class DisplayMainMenu extends javax.swing.JFrame {
         jLabel2.setFont(new Font("Helvetica", Font.PLAIN, 20));
         jLabel1.setText("Hello,  " + firstName + " " + lastName);
         jLabel2.setText("Please pick the Quiz Level");
-        System.out.println(userDATA[5]);
         if(userLevel.equals("1")){
             buttonQ2.setEnabled(false);
             buttonQ3.setEnabled(false);
@@ -81,6 +80,7 @@ public class DisplayMainMenu extends javax.swing.JFrame {
 
         jLabel2.setText("jLabel2");
 
+        buttonResults.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         buttonResults.setText("Check Results");
         buttonResults.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +88,7 @@ public class DisplayMainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonQ1.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         buttonQ1.setText("Quiz1");
         buttonQ1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +96,7 @@ public class DisplayMainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonQ2.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         buttonQ2.setText("Quiz 2");
         buttonQ2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,6 +104,7 @@ public class DisplayMainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonQ3.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         buttonQ3.setText("Quiz 3");
         buttonQ3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,6 +112,7 @@ public class DisplayMainMenu extends javax.swing.JFrame {
             }
         });
 
+        buttonQ4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         buttonQ4.setText("Final Quiz");
         buttonQ4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,47 +225,8 @@ public class DisplayMainMenu extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_buttonQ4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DisplayMainMenu(userDATA).setVisible(true);
-            }
-        });
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonQ1;

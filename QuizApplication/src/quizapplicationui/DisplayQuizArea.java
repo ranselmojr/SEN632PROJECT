@@ -48,9 +48,12 @@ public class DisplayQuizArea extends javax.swing.JFrame {
             jLabel2.setText("Final Quiz Level");
         }
 
-        QuizData quiz = new QuizData();
+        //QuizData quiz = new QuizData();
+        Quiz quiz = new Quiz(null, null, null, null, null,
+                false, false, 0);
 
-        ArrayList<QuizQuestionBank> quizQuestion = quiz.getQuizQuestions(quizType);  //Store Quiz
+        //ArrayList<QuizQuestionBank> quizQuestion = quiz.getQuizQuestions(quizType);  //Store Quiz
+        ArrayList<Quiz> quizQuestion = quiz.getQuizQuestions(quizTYPE);  //Store Quiz
 
         quizQuestion = quiz.shuffleQuestionsChoices(quizQuestion); //Store Shuffled Quiz
 
@@ -62,10 +65,12 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         ArrayList<String> preShuffle = new ArrayList<String>();
 
         while (itr2.hasNext()) {
-            QuizQuestionBank qr2 = (QuizQuestionBank) itr2.next();
-            quizQuestion2.add(qr2.question);
+            //QuizQuestionBank qr2 = (QuizQuestionBank) itr2.next();
+            Quiz qr2 = (Quiz) itr2.next();
+            //quizQuestion2.add(qr2.question);
+            quizQuestion2.add(qr2.getQuestion());
 
-            if (!qr2.is_tf) {
+           /* if (!qr2.is_tf) {
                 correctAnswerStorage.add(qr2.corAnswer);
             } else {
                 if (qr2.tf_ans) {
@@ -75,14 +80,32 @@ public class DisplayQuizArea extends javax.swing.JFrame {
                 }
 
             }
-
             isTrueFalse.add(qr2.is_tf);
             isTrueFalse.add(qr2.tf_ans);
 
             preShuffle.add(qr2.corAnswer);
             preShuffle.add(qr2.wrongAns1);
             preShuffle.add(qr2.wrongAns2);
-            preShuffle.add(qr2.wrongAns3);
+            preShuffle.add(qr2.wrongAns3);*/
+            
+            if (!qr2.is_tf()) {
+                correctAnswerStorage.add(qr2.getCorAnswer());
+            } else {
+                if (qr2.get_tf_Ans()) {
+                    correctAnswerStorage.add("True");
+                } else {
+                    correctAnswerStorage.add("False");
+                }
+
+            }
+
+            isTrueFalse.add(qr2.is_tf());
+            isTrueFalse.add(qr2.get_tf_Ans());
+
+            preShuffle.add(qr2.getCorAnswer());
+            preShuffle.add(qr2.getwrongAns1());
+            preShuffle.add(qr2.getwrongAns2());
+            preShuffle.add(qr2.getwrongAns3());
 
         }
         final String html1 = "<html><body style='width: ";
@@ -299,7 +322,7 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
         setFocusableWindowState(false);
-        setPreferredSize(new java.awt.Dimension(1200, 1400));
+        setPreferredSize(new java.awt.Dimension(1100, 1100));
 
         jLabel1.setText("jLabel1");
 
@@ -712,7 +735,7 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         setCorrectAnswer();
         
         if (testScore > 69.00) {
-            QuizData quizResult = new QuizData();
+            Quiz quizResult = new Quiz(userID, testScore, quizTYPE);
             quizResult.writeResult(userID, testScore, quizTYPE);
         }
 
@@ -741,43 +764,7 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizArea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DisplayQuizArea().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;

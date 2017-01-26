@@ -35,9 +35,10 @@ public class DisplayQuizHistory extends javax.swing.JFrame {
         
         userID = (int) userData[0];
         userDATA = userData;
-        QuizData data = new QuizData();
+        Quiz data = new Quiz(0,00.0,0);
         //DefaultTableModel model = new DefaultTableModel();
-        ArrayList<QuizResult> quizResult = data.getResult(userID);
+        //ArrayList<Quiz> quizResult = data.getResult(userID);
+        ArrayList<Quiz> quizResult = data.getResult(userID);
         
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -46,10 +47,12 @@ public class DisplayQuizHistory extends javax.swing.JFrame {
         Iterator itr=quizResult.iterator();
         Object obj = new Object();
         while(itr.hasNext()){  
-            QuizResult qr=(QuizResult)itr.next(); 
+            Quiz qr=(Quiz)itr.next(); 
 
-            dataModel.addRow(new String[] { "    "+qr.quizType, 
-                "   "+Double.toString(qr.quizResult)+" %", "    "+qr.quizTaken });    
+            //dataModel.addRow(new String[] { qr.quizType, 
+                //Double.toString(qr.quizResult), qr.quizTaken});
+            dataModel.addRow(new String[] { qr.getQuizType(),
+                Double.toString(qr.getQuizResult()), qr.quizTaken()}); 
         }
         
         jTable1.setModel(dataModel);
@@ -175,55 +178,7 @@ public class DisplayQuizHistory extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DisplayQuizHistory.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DisplayQuizHistory();
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
