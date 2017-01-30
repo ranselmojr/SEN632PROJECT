@@ -48,46 +48,26 @@ public class DisplayQuizArea extends javax.swing.JFrame {
             jLabel2.setText("Final Quiz Level");
         }
 
-        //QuizData quiz = new QuizData();
-        Quiz quiz = new Quiz(null, null, null, null, null,
+        Quiz quiz = new Quiz(0, null, null, null, null, null,
                 false, false, 0);
 
-        //ArrayList<QuizQuestionBank> quizQuestion = quiz.getQuizQuestions(quizType);  //Store Quiz
         ArrayList<Quiz> quizQuestion = quiz.getQuizQuestions(quizTYPE);  //Store Quiz
 
         quizQuestion = quiz.shuffleQuestionsChoices(quizQuestion); //Store Shuffled Quiz
 
         Iterator itr2 = quizQuestion.iterator(); //Iterate through to capture quizData
 
-        ArrayList<String> quizQuestion2 = new ArrayList<String>();
-        ArrayList<Boolean> isTrueFalse = new ArrayList<Boolean>();
-        ArrayList<String> testShuffle = new ArrayList<String>();
-        ArrayList<String> preShuffle = new ArrayList<String>();
+        ArrayList<String> quizQuestion2 = new ArrayList<>();
+        ArrayList<Boolean> isTrueFalse = new ArrayList<>();
+        ArrayList<String> testShuffle = new ArrayList<>();
+        ArrayList<String> preShuffle = new ArrayList<>();
 
         while (itr2.hasNext()) {
-            //QuizQuestionBank qr2 = (QuizQuestionBank) itr2.next();
+
             Quiz qr2 = (Quiz) itr2.next();
-            //quizQuestion2.add(qr2.question);
+
             quizQuestion2.add(qr2.getQuestion());
 
-           /* if (!qr2.is_tf) {
-                correctAnswerStorage.add(qr2.corAnswer);
-            } else {
-                if (qr2.tf_ans) {
-                    correctAnswerStorage.add("True");
-                } else {
-                    correctAnswerStorage.add("False");
-                }
-
-            }
-            isTrueFalse.add(qr2.is_tf);
-            isTrueFalse.add(qr2.tf_ans);
-
-            preShuffle.add(qr2.corAnswer);
-            preShuffle.add(qr2.wrongAns1);
-            preShuffle.add(qr2.wrongAns2);
-            preShuffle.add(qr2.wrongAns3);*/
-            
             if (!qr2.is_tf()) {
                 correctAnswerStorage.add(qr2.getCorAnswer());
             } else {
@@ -313,6 +293,8 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
@@ -421,6 +403,15 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         });
 
         jMenu3.setText("File");
+
+        jMenuItem2.setText("Logout");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+        jMenu3.add(jSeparator1);
 
         jMenuItem1.setText("Exit");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -590,8 +581,8 @@ public class DisplayQuizArea extends javax.swing.JFrame {
 
         jButton3.setVisible(false);
     }
-    
-    private void setCorrectAnswer(){
+
+    private void setCorrectAnswer() {
         if (jRadioButton1.getText().equals(correctAnswerStorage.get(0))) {
             jRadioButton1.setFont(new Font("Helvetica", Font.BOLD | Font.ITALIC, 15));
 
@@ -676,8 +667,9 @@ public class DisplayQuizArea extends javax.swing.JFrame {
             jRadioButton20.setFont(new Font("Helvetica", Font.BOLD | Font.ITALIC, 15));
 
         }
+
     }
-    
+
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
@@ -695,7 +687,7 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         //Calculate Result
         Double testScore = 0.00;
         int correct = 0;
-        
+
         try {
             if (buttonGroup1.getSelection().getActionCommand().equals(
                     correctAnswerStorage.get(0))) {
@@ -733,11 +725,29 @@ public class DisplayQuizArea extends javax.swing.JFrame {
         jLabel2.setText("That is " + testScore + "%");
 
         setCorrectAnswer();
-        
+
         if (testScore > 69.00) {
             Quiz quizResult = new Quiz(userID, testScore, quizTYPE);
             quizResult.writeResult(userID, testScore, quizTYPE);
+            User user = new User();
+            user.upgradeUser(userID);
+
+            switch ((String) userDATA[5]) {
+                case "1":
+                    userDATA[5]  = "2";
+                    break;
+                case "2":
+                    userDATA[5]  = "3";
+                    break;
+                case "3":
+                    userDATA[5]  = "4";
+                    break;
+                default:
+                    break;
+
+            }
         }
+        correctAnswerStorage.removeAll(correctAnswerStorage);
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -756,15 +766,20 @@ public class DisplayQuizArea extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-
         JFrame f = new DisplayMainMenu(userDATA);
-        //jButtonGroup1.setSelected(jRadioButton1, true);
+
         f.setVisible(true);
-        //new DisplayMainMenu(userData).setVisible(true);
+
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        JFrame f = new DisplayLogin();
+        f.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
@@ -787,6 +802,7 @@ public class DisplayQuizArea extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton10;
     private javax.swing.JRadioButton jRadioButton11;
@@ -807,5 +823,6 @@ public class DisplayQuizArea extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

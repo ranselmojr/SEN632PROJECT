@@ -23,7 +23,8 @@ public class Quiz {
     private Connection con = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-
+    
+    private int quizID;
     private String question;
     private String corAnswer;
     private String wrongAns1;
@@ -33,16 +34,11 @@ public class Quiz {
     private boolean tf_ans;
     private int quizT;
 
-    //Quiz(){
-    //    this.resultID = resultID;
-    //    this.user_id = user_id;
-    //   this.quizResult = quizResult;
-    //    this.quizType = quizType;
-    //   this.quizTaken = quizTaken;
-    //}
-    public Quiz(String question, String corAnswer, String wrongAns1,
+    
+    public Quiz(int quizID, String question, String corAnswer, String wrongAns1,
             String wrongAns2, String wrongAns3, boolean is_tf,
             boolean tf_ans, int quizT) {
+        this.quizID = quizID;
         this.question = question;
         this.corAnswer = corAnswer;
         this.wrongAns1 = wrongAns1;
@@ -89,6 +85,10 @@ public class Quiz {
     
     public String quizTaken(){
         return quizTaken;
+    }
+    
+    public int getQuizId(){
+        return quizID;
     }
     
     public String  getQuestion(){
@@ -151,7 +151,7 @@ public class Quiz {
             while (rs.next()) {
     
 
-                quizQuestion.add(new Quiz(rs.getString(2),
+                quizQuestion.add(new Quiz(rs.getInt(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getBoolean(7), rs.getBoolean(8),
                         rs.getInt(9)
