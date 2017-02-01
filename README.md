@@ -10,4 +10,8 @@ Adam Swogger
 
 
 Programming Language - Java
-Database - DigitalOcean
+Integrated Development Environment: Netbeans
+Database: MySQL 
+Cloud Service Provider: Digital Ocean
+Repository: Github
+Other tools: Draw iO
