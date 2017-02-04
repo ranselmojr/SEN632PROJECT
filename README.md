@@ -20,8 +20,10 @@ Adam Swogger
 4. Repository: Github
 5. Other tools: Draw iO
 
-# USe Cases
+# Use Cases
+
 The major functions are listed below.  All of them have self-identifying names
+
 1. User Login or Register
 2. User Takes Quiz
 3. User Views Score
