@@ -11,8 +11,18 @@ Mary Coronado
 
 Adam Swogger
 
-# Architectural View 
+# Project Scope 
+An application for users who want to test their knowledge of software engineering. 
 
+#Features/Requirements 
+1. Admin and Student users
+2. User authentication
+3. Wide variety of software engineering questions.
+4. Multiple choice or true/false 
+5. Results displayed as a percent
+6. Provide the ability for user to view their history results
+
+# Architectural View 
 1. Programming Language - Java
 2. Integrated Development Environment: Netbeans
 3. Database: MySQL 
