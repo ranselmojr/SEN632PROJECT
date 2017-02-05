@@ -123,7 +123,7 @@ public class User {
      */
     public Object[] getUser(String username) {
         String value_user = null;
-        Object[] userData = new Object[6];
+        Object[] userData = new Object[7];
 
         try {
             con = DatabaseConnection.getConnection();
@@ -142,8 +142,11 @@ public class User {
                 userData[3] = rs.getString(4);
                 userData[4] = rs.getString(5);
                 userData[5] = rs.getString(7);
+                userData[6] = rs.getInt(8);
 
             }
+            
+            System.out.println();
 
             con.close();
             return userData;
@@ -152,6 +155,38 @@ public class User {
             System.out.println(e);
         }
         return userData;
+    }
+    
+    /**
+     * Get the user info from the Database and return data 
+     *    in an Object
+     * 
+     * @param username
+     * @return 
+     */
+    public void updateUser(Object[] user) {
+        String value_user = null;
+        Object[] userData = new Object[7];
+
+        try {
+            con = DatabaseConnection.getConnection();
+            //stmt = con.createStatement();
+            //rs = stmt.executeQuery(sql);
+
+            String sql2 = "update user set"
+                    + " firstname='"+ user[1] +"',"
+                    + " lastname='" + user[2] +"',"
+                    + " email='" + user[3] +"',"
+                    + " quizlevel='" + Integer.parseInt((String)user[4])+"',"
+                    + " is_admin=" + user[5]
+                    +" where id="+user[0];
+            PreparedStatement preparedStmt = con.prepareStatement(sql2);
+            preparedStmt.executeUpdate();
+            con.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
     
     public boolean upgradeUser(int userID){
